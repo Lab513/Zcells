@@ -1,0 +1,21 @@
+# ignore temporary files:
+**/*~
+
+# ignore matlab temp files:
+**/*.asv
+
+# ignore playgrounds: (not yet)
+# **/playground*.*
+
+# ignore subdirectories of the google_drive folder: (except the readme)
+google_drive/*
+!google_drive/README.md
+
+# ignore all matlab data files
+**/*.mat
+
+# ignore all zip files
+**/*.zip
+
+# ignore local testing files:
+**/localtest*.*
