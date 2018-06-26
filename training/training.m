@@ -13,7 +13,7 @@
 %       'params', the struct containing parameters needed for others
 % functions.
 
-function [SVMmodels] = training(training_set, data, varargin)
+function [RandomForest] = training(training_set, data, varargin)
     
     ip = inputParser();
     addRequired(ip,'training_set',@isstruct);
@@ -36,29 +36,23 @@ function [SVMmodels] = training(training_set, data, varargin)
         curr_siblings = curr_siblings{1};
         
         for ind2 = 1:numel(curr_siblings) % Assign children, siblings and parents into the models structure
-            SVMmodels.(curr_siblings{ind2}).siblings = setdiff(curr_siblings, curr_siblings{ind2});
+            RandomForest.(curr_siblings{ind2}).siblings = setdiff(curr_siblings, curr_siblings{ind2});
             if isfield(training_set.hierarchy,curr_siblings{ind2})
-                SVMmodels.(curr_siblings{ind2}).parent = training_set.hierarchy.(curr_siblings{ind2});
+                RandomForest.(curr_siblings{ind2}).parent = training_set.hierarchy.(curr_siblings{ind2});
             else
-                SVMmodels.(curr_siblings{ind2}).parent = '';
+                RandomForest.(curr_siblings{ind2}).parent = '';
             end
             if any(strcmp(curr_siblings{ind2},parents))
-                SVMmodels.(curr_siblings{ind2}).children = children(strcmp(curr_siblings{ind2},parents));
+                RandomForest.(curr_siblings{ind2}).children = children(strcmp(curr_siblings{ind2},parents));
             end
         end
         
-        % Launch SVM training
-        if numel(curr_siblings) == 2 ... % If there are only 2 classes...
-               && compare_parameters(training_set, curr_siblings{:}) % .. and the parameters for the two are the same --> Binary SVM
-            SVMmodels.(curr_siblings{1}).type = 'binary';
-            SVMmodels.(curr_siblings{2}).type = 'binary';
-            SVMmodels.(curr_siblings{2}).SVM = [];
-            [SVMmodels.(curr_siblings{1}).SVM, cluster] = LaunchTraining(training_set,data,curr_siblings{1},curr_siblings, cluster);
-        else
-            for ind2 = 1:numel(curr_siblings)
-                SVMmodels.(curr_siblings{ind2}).type = 'WTA';
-                [SVMmodels.(curr_siblings{ind2}).SVM, cluster] = LaunchTraining(training_set,data,curr_siblings{ind2},curr_siblings, cluster);
-            end
+        % Launch Forest training
+        [Trees, cluster] = LaunchTraining(training_set,data,curr_siblings{1},curr_siblings, cluster);
+
+        for ind2 = 1:numel(curr_siblings)
+            RandomForest.(curr_siblings{ind2}).type = 'Trees';
+            RandomForest.(curr_siblings{ind2}).SVM = Trees;
         end
     end
 end
@@ -73,11 +67,11 @@ function [output, cluster] = LaunchTraining(training_set,data,classname,siblings
             tokeep = tokeep | data.label == find(strcmp(siblings{ind1},training_set.classnames));
     end
 
-    data.label = data.label(tokeep) == find(strcmp(training_set.classnames,classname));
+    data.label = data.label(tokeep);
     data.components = data.components(tokeep,:);
 
-    SVM_params = training_set.parameters.SVM_params.(classname);
-    SVM_optim = process_SVM_optim(training_set.parameters.SVM_optim.(classname),data);
+    % Get classes' parameters:
+    RF_params = training_set.parameters.SVM_params.(classname);
 
     
     % Launch the SVM:
@@ -93,32 +87,27 @@ function [output, cluster] = LaunchTraining(training_set,data,classname,siblings
                 cluster.NumWorkers = pp.nbWorkers;
             end
         end
-        output = batch(cluster,@launchfitcsvm, 1, {data,SVM_params,SVM_optim,training_set.parameters.maxmemUse/cluster.NumWorkers});
+        output = batch(cluster,@launchfitTrees, 1, {data,RF_params});
     else % Do not parallelize
         cluster = [];
-        output = launchfitcsvm(data,SVM_params,SVM_optim, training_set.parameters.maxmemUse);
+        output = launchfitTrees(data,RF_params);
     end
 
 end
 
-function output = launchfitcsvm(data,SVM_params,SVM_optim, cachesize)
+function output = launchfitTrees(data,RF_params)
 
-% strlabels = repmat({'a'},1,numel(data.label));
-% strlabels{data.label} = 'z';
+nt = find(strcmp(RF_params,'NumTrees')); % Should be the first one, but I guess this is more secure...
+NumTrees = RF_params{nt+1};
+RF_params(nt+1) = [];
+RF_params(nt) = [];
 
-if ~isempty(SVM_optim)
-    output = fitcsvm(data.components,data.label,'Verbose',1,'CacheSize',cachesize*1000, ...
-                                                        SVM_params{:},...
-                                                        'OptimizeHyperparameters',SVM_optim);
-else
-    output = fitcsvm(data.components,data.label,'Verbose',1,'CacheSize',cachesize*1000, ...
-                                                        SVM_params{:});
-end
+output = TreeBagger(NumTrees,data.components,data.label,...
+    'Method','classification',...
+    RF_params{:});
 
 output = compact(output);
 end
-
-
 
 
 
@@ -139,55 +128,43 @@ function processed = process_SVM_params(training_params, classnames)
     else
         spec = struct();
     end
+    
+    % Transform the SampleWithReplacement value from boolean to
+    % Matlab's 'on'/'off' bullshit:
+    if def.SVM.SampleWithReplacement
+        def.SVM.SampleWithReplacement = 'on';
+    else
+        def.SVM.SampleWithReplacement = 'off';
+    end
+    
+    
 
     % Compute the parameters for each class:
     for ind1 = 1:numel(classnames)
         currclass = classnames{ind1};
+        
         if isfield(spec,currclass)
             if isfield(spec.(currclass),'SVM')
+                % Transform the SampleWithReplacement value from boolean to
+                % Matlab's 'on'/'off' bullshit:
+                if isfield(spec.(currclass).SVM,'SampleWithReplacement')
+                    if spec.(currclass).SVM.SampleWithReplacement
+                        spec.(currclass).SVM.SampleWithReplacement = 'on';
+                    else
+                        spec.(currclass).SVM.SampleWithReplacement = 'off';
+                    end
+                end
                 SVM.(currclass) = parameters_cell(def.SVM, spec.(currclass).SVM);
             else
                 SVM.(currclass) = parameters_cell(def.SVM, struct());
             end
-            if isfield(spec.(currclass),'OptimizeSVM')
-                OptimizeSVM.(currclass) = parameters_struct(def.OptimizeSVM, spec.(currclass).OptimizeSVM);
-            else
-                OptimizeSVM.(currclass) = parameters_struct(def.OptimizeSVM, struct());
-            end
         else
             SVM.(currclass) = parameters_cell(def.SVM, struct());
-            OptimizeSVM.(currclass) = parameters_struct(def.OptimizeSVM, struct());
-            subsample.(currclass) = def.subsample;
         end
-        if numel(OptimizeSVM.(currclass).KernelFunction) < 2
-            OptimizeSVM.(currclass).KernelFunction = struct('Optimize',false);
-        else
-            OptimizeSVM.(currclass).KernelFunction = struct('Optimize',true,'Range',OptimizeSVM.(currclass).KernelFunction);
-        end
+
     end
 
     processed.SVM_params = SVM;
-    processed.SVM_optim = OptimizeSVM;
-end
-
-function SVM_optim = process_SVM_optim(s,d)
-    SVM_optim = hyperparameters('fitcsvm',d.components,d.label);
-
-    options = fieldnames(s);
-    optim_all = false;
-    for ind1 = 1:numel(options)
-        values = fieldnames(s.(options{ind1}));
-        optim = logical(s.(options{ind1}).Optimize);
-        s.(options{ind1}).Optimize = optim;
-        optim_all = optim_all || optim;
-        for ind2 = 1:numel(values)
-            theone = arrayfun(@(x) strcmp(x.Name,options{ind1}),SVM_optim);
-            SVM_optim(theone).(values{ind2}) = s.(options{ind1}).(values{ind2});
-        end
-    end
-    if ~optim_all
-        SVM_optim = [];
-    end
 end
 
 function [siblings, allchildren, allparents] = process_SVM_tree(hierarchy,classnames)
@@ -213,10 +190,6 @@ function res = parameters_cell(default, spec)
         default.(fnames{ind1}) = spec.(fnames{ind1});
     end
 
-    if ~strcmp(default.KernelFunction,'Polynomial')
-        default = rmfield(default,'PolynomialOrder');
-    end
-
     params_names = fieldnames(default);
     res = {};
     for ind1 = 1:numel(params_names)
@@ -235,6 +208,5 @@ function res = parameters_struct(default, spec)
 end
 
 function yesno = compare_parameters(training_set, sib1, sib2)
-yesno = isequal(training_set.parameters.SVM_params.(sib1),training_set.parameters.SVM_params.(sib2)) && ...
-    isequal(training_set.parameters.SVM_optim.(sib1),training_set.parameters.SVM_optim.(sib2));
+yesno = isequal(training_set.parameters.SVM_params.(sib1),training_set.parameters.SVM_params.(sib2));
 end

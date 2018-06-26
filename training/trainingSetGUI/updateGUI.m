@@ -1,7 +1,7 @@
 % Main update function: 
 function updateGUI(handles,varargin)
 
-global trainingpx_local miscgui
+global trainingpx_local miscgui classnames_local
 % Process inputs:
 ip = inputParser();
 ip.addParameter('updateOldies',true);
@@ -34,6 +34,18 @@ if isfield(miscgui,'currentstack')
     
     udapte_zpxtext(handles);
 end
+
+% Update visibility check: (If user makes any class visible, ensure that it turns on)
+if isfield(miscgui,'invisibleclasses') ...
+        && ~isempty(miscgui.invisibleclasses)
+	if isequal(classnames_local,miscgui.invisibleclasses)
+        handles.visibility_check.Value = 0;
+    else
+        handles.visibility_check.Value = 1;
+    end
+else
+    handles.visibility_check.Value = 1;
+end 
 
 % Update the history of operations:
 if ip.Results.updateOldies

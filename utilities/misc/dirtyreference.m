@@ -5,6 +5,7 @@ classdef dirtyreference < handle
         classnames = {};
         training_params = struct();
         hierarchy = [];
+        frame_processing = {};
     end
     properties (SetObservable)
         finished = false;

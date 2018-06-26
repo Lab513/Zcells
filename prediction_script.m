@@ -23,37 +23,45 @@ end
 %%
 % Launch prediction:
 for ind1 = 1:numel(fname_c)
-    clearvars res I S% To save some space
+    clearvars res I S % To save some space
     
     % Load stack
     fname = fname_c{ind1};
     disp(fname)
     stack = matfile(fullfile(pname,fname));
     
-
+%     tic
     % Predict
-    res = RunPrediction(stack, ...
+    res{ind1} = RunPrediction(stack, ...
                         feat_extr, ...
                         feat_mu, ...
                         SVMs, ...
                         'use_features', frame_processing, ...
-                        'Parallelize', 8, ...
+                        'IndependentJob', false, ...
+                        'Parallelize', 3, ...
                         'FramesSelection',frames ... % Either use the frames subselection from the saved classifier or a custom subselection...
                         );
+%     toc
     
     % Display prediction results:
     firstframe = stack.stack(1,1);
     firstframe = firstframe{1};
-    [I, ~] = show_classes(res, size(firstframe),'Colors',rgbmap);
-    figure(1);
+    [I, ~] = show_classes(res{ind1}, size(firstframe),'Colors',rgbmap);
+    figure(ind1);
     imshow(I);
     title(['Prediction results for stack ' fname])
     
-    % Display prediction overall confidence:
-    [S, ~] = show_conf(res, size(firstframe));
-    figure(2)
+%     Display prediction overall confidence:
+    [S, ~] = show_conf(res{ind1}, size(firstframe));
+    figure(10+ind1)
     imshow(S);
     title(['Prediction confidence for stack ' fname])
+    
+    midframe = stack.stack(1,50);
+    figure(20+ind1)
+    imshow(imadjust(midframe{1}))
+    title(['Prediction confidence for stack ' fname])
+    drawnow
     
 end
 

@@ -76,7 +76,7 @@ function Results = RunPredictionSubroutine(SVMs, data, parallelize,autosave,save
 
         % Run the prediction:
         Scores = predict_siblings(SVMs,data_to_classify,siblings,parallelize,verbosity);
-        Scores = mysoftmax(Scores);
+%         Scores = mysoftmax(Scores);
         [~, tmp_dump] = max(Scores, [], 2);
 
         % Tidy-up results:
@@ -113,6 +113,10 @@ function Scores = predict_siblings(SVMs,data,siblings,Parallelize,verbosity)
                 end
             case 'WTA'
                 SVM_models{ind1} = s.SVM;
+            case 'Trees'
+                Trees_model = s.SVM;
+                Scores = script_predict_trees(Trees_model, data, siblings, Parallelize,verbosity);
+                return;
         end
     end
     Scores = script_predict(SVM_models, data, siblings, Parallelize,verbosity);
@@ -163,3 +167,10 @@ function Scores = script_predict(SVM_models, mat, classnames, Parallelize, verbo
         end
         Scores(:,j) = scoreSVM(:,2);
     end
+
+function Scores = script_predict_trees(Trees_model, mat, classnames, Parallelize, verbosity)
+
+disp(['Launching prediction for classes: ' [classnames{:}]]);
+tic
+[~,Scores,~] = predict(Trees_model,mat);
+toc

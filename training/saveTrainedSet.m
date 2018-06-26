@@ -6,7 +6,7 @@ successFlag = false;
 SVMsNames = fieldnames(SVMs);
 for ind1 = 1:numel(SVMsNames)
     res = SVMs.(SVMsNames{ind1}).SVM;
-    if any(strfind(class(res),'ClassificationSVM')) || isempty(res)
+    if any(strfind(class(res),'TreeBagger')) || isempty(res)
         % Do nothing
     elseif any(strfind(class(res),'parallel.job')) && strcmp(res.State,'finished')
         % If finished, fetch job outputs
@@ -17,7 +17,7 @@ for ind1 = 1:numel(SVMsNames)
         return;
     end
 end
-        
+
 
 % Save only parts relevant for prediction and results display:
 rgbmap = training_set.rgbmap;
@@ -33,7 +33,7 @@ else
 end
 type_of_file = 'trained classifier';
 
-save(path,'SVMs','rgbmap','classnames','frames','feat_extr','feat_mu','frame_processing','type_of_file')
+save(path,'SVMs','rgbmap','classnames','frames','feat_extr','feat_mu','frame_processing','type_of_file','-v7.3')
 successFlag = true;
 return;
 
