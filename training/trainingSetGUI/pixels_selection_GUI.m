@@ -793,7 +793,7 @@ updateClassesBox(miscgui.debugging.handles);
 % Update the operations box:
 updateOPbox(miscgui.debugging.handles);
 
-udapte_zpxtext(handles);
+udapte_zpxtext(miscgui.debugging.handles);
 
 function txt = DataCursor_myupdatefcn(~,event_obj)
 global miscgui trainingpx_local
