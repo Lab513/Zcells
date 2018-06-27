@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="273.26468mm"
+   height="102.77129mm"
+   viewBox="0 0 273.26468 102.77129"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="hierarchy.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1805"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1803"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1747"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1745"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1695"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1693"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1649"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1647"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1609"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1607"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1575"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1573"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker1541"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path1539"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1206"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1200"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1609-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1607-6"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="796.93666"
+     inkscape:cy="209.36731"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="3840"
+     inkscape:window-height="2031"
+     inkscape:window-x="0"
+     inkscape:window-y="55"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(62.824483,-1.1618732)">
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#dddddd;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect1891-4"
+       width="129.89299"
+       height="12.561669"
+       x="80.047218"
+       y="45.897625"
+       rx="6.2808347"
+       ry="6.2808347" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#dddddd;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect1891"
+       width="129.89299"
+       height="12.561669"
+       x="15.23436"
+       y="1.6618732"
+       rx="6.2808347"
+       ry="6.2808347" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#dddddd;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect1891-6"
+       width="85.793518"
+       height="12.561668"
+       x="-29.399651"
+       y="45.897625"
+       rx="6.2808342"
+       ry="6.2808342" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#dddddd;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect1891-4-7"
+       width="134.76169"
+       height="13.032511"
+       x="-27.796032"
+       y="90.400658"
+       rx="6.5162554"
+       ry="6.5162554" />
+    <g
+       id="g1095"
+       transform="translate(0,-15.875)">
+      <flowRoot
+         transform="matrix(0.26458333,0,0,0.26458333,0,-0.54684492)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         id="flowRoot815"
+         xml:space="preserve"><flowRegion
+           id="flowRegion817"><rect
+             y="74.991493"
+             x="70.710678"
+             height="40.153564"
+             width="124.24876"
+             id="rect819" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#0000ff"
+           id="flowPara821">Class 1</flowPara></flowRoot>      <flowRoot
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none"
+         id="flowRoot815-4"
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,46.534186,-0.54684492)"><flowRegion
+           style="fill:#ff0000"
+           id="flowRegion817-7"><rect
+             style="fill:#ff0000"
+             y="74.991493"
+             x="70.710678"
+             height="40.153564"
+             width="124.24876"
+             id="rect819-6" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff0000"
+           id="flowPara821-8">Class 2</flowPara></flowRoot>      <flowRoot
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#00ff00;fill-opacity:1;stroke:none"
+         id="flowRoot815-9"
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,93.068369,-0.54684492)"><flowRegion
+           style="fill:#00ff00"
+           id="flowRegion817-0"><rect
+             style="fill:#00ff00"
+             y="74.991493"
+             x="70.710678"
+             height="40.153564"
+             width="124.24876"
+             id="rect819-68" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#00ff00"
+           id="flowPara821-7">Class 3</flowPara></flowRoot>    </g>
+    <g
+       id="g1181"
+       transform="translate(0,-12.764773)">
+      <g
+         id="g1105">
+        <flowRoot
+           xml:space="preserve"
+           id="flowRoot815-7"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#ff00ff;fill-opacity:1;stroke:none"
+           transform="matrix(0.26458333,0,0,0.26458333,-45.665424,40.378228)"><flowRegion
+             id="flowRegion817-4"
+             style="fill:#ff00ff"><rect
+               id="rect819-9"
+               width="124.24876"
+               height="40.153564"
+               x="70.710678"
+               y="74.991493"
+               style="fill:#ff00ff" /></flowRegion><flowPara
+             id="flowPara821-9"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff00ff">Class 4</flowPara></flowRoot>        <flowRoot
+           transform="matrix(0.26458333,0,0,0.26458333,0.86876254,40.378228)"
+           xml:space="preserve"
+           id="flowRoot815-4-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#ffd42a;fill-opacity:1;stroke:none"><flowRegion
+             id="flowRegion817-7-5"
+             style="fill:#ffd42a"><rect
+               id="rect819-6-9"
+               width="124.24876"
+               height="40.153564"
+               x="70.710678"
+               y="74.991493"
+               style="fill:#ffd42a" /></flowRegion><flowPara
+             id="flowPara821-8-3"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ffd42a">Class 5</flowPara></flowRoot>      </g>
+      <g
+         id="g1119">
+        <flowRoot
+           xml:space="preserve"
+           id="flowRoot815-1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#d4ff2a;fill-opacity:1;stroke:none"
+           transform="matrix(0.26458333,0,0,0.26458333,64.449621,40.779132)"><flowRegion
+             id="flowRegion817-9"
+             style="fill:#d4ff2a"><rect
+               id="rect819-97"
+               width="124.24876"
+               height="40.153564"
+               x="70.710678"
+               y="74.991493"
+               style="fill:#d4ff2a" /></flowRegion><flowPara
+             id="flowPara821-82"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#d4ff2a">Class 6</flowPara></flowRoot>        <flowRoot
+           transform="matrix(0.26458333,0,0,0.26458333,110.98381,40.779132)"
+           xml:space="preserve"
+           id="flowRoot815-4-5"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#00ffff;fill-opacity:1;stroke:none"><flowRegion
+             id="flowRegion817-7-3"
+             style="fill:#00ffff"><rect
+               id="rect819-6-4"
+               width="124.24876"
+               height="40.153564"
+               x="70.710678"
+               y="74.991493"
+               style="fill:#00ffff" /></flowRegion><flowPara
+             id="flowPara821-8-9"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#00ffff">Class 7</flowPara></flowRoot>        <flowRoot
+           transform="matrix(0.26458333,0,0,0.26458333,157.51799,40.779132)"
+           xml:space="preserve"
+           id="flowRoot815-9-0"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#ff0066;fill-opacity:1;stroke:none"><flowRegion
+             id="flowRegion817-0-2"
+             style="fill:#ff0066"><rect
+               id="rect819-68-0"
+               width="124.24876"
+               height="40.153564"
+               x="70.710678"
+               y="74.991493"
+               style="fill:#ff0066" /></flowRegion><flowPara
+             id="flowPara821-7-1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff0066">Class 8</flowPara></flowRoot>      </g>
+    </g>
+    <g
+       id="g1133">
+      <flowRoot
+         transform="matrix(0.26458333,0,0,0.26458333,-44.596346,72.049666)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#87aade;fill-opacity:1;stroke:none"
+         id="flowRoot815-96"
+         xml:space="preserve"><flowRegion
+           style="fill:#87aade"
+           id="flowRegion817-2"><rect
+             style="fill:#87aade"
+             y="74.991493"
+             x="70.710678"
+             height="40.153564"
+             width="124.24876"
+             id="rect819-1" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#87aade"
+           id="flowPara821-2">Class 9</flowPara></flowRoot>      <flowRoot
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#6c535d;fill-opacity:1;stroke:none"
+         id="flowRoot815-4-0"
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,1.9378406,72.049666)"><flowRegion
+           style="fill:#6c535d"
+           id="flowRegion817-7-7"><rect
+             style="fill:#6c535d"
+             y="74.991493"
+             x="70.710678"
+             height="39.648487"
+             width="135.86552"
+             id="rect819-6-3" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#6c535d"
+           id="flowPara821-8-1">Class 10</flowPara></flowRoot>      <flowRoot
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none"
+         id="flowRoot815-9-1"
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,48.472027,72.049666)"><flowRegion
+           style="fill:#ff7f2a"
+           id="flowRegion817-0-9"><rect
+             style="fill:#ff7f2a"
+             y="74.991493"
+             x="70.710678"
+             height="39.143414"
+             width="141.92644"
+             id="rect819-68-05" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ff7f2a"
+           id="flowPara821-7-6">Class 11</flowPara></flowRoot>    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="M 31.136899,15.297918 -7.4835466,47.370261"
+       id="path1195"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1609)"
+       d="m 34.2105,15.030648 3.741772,30.468726"
+       id="path1525"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1575)"
+       d="m 125.48304,17.302439 -24.9897,28.196935"
+       id="path1527"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1541)"
+       d="m 128.15574,17.703343 15.90253,29.132378"
+       id="path1529"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1805)"
+       d="m 132.83295,17.569708 54.79026,29.934186"
+       id="path1531"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1747)"
+       d="M 30.735995,60.867371 -8.0180856,91.603366"
+       id="path1533"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1695)"
+       d="m 34.611402,61.001007 8.151723,30.33509"
+       id="path1535"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1649)"
+       d="M 39.288619,60.867371 80.047223,90.534288"
+       id="path1537"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-62.583172"
+       y="10.774808"
+       id="text1881"><tspan
+         sodipodi:role="line"
+         id="tspan1879"
+         x="-62.583172"
+         y="10.774808"
+         style="stroke-width:0.26458332">Level 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-62.926083"
+       y="55.010559"
+       id="text1885"><tspan
+         sodipodi:role="line"
+         id="tspan1883"
+         x="-62.926083"
+         y="55.010559"
+         style="stroke-width:0.26458332">Level 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-62.744045"
+       y="99.246315"
+       id="text1889"><tspan
+         sodipodi:role="line"
+         id="tspan1887"
+         x="-62.744045"
+         y="99.246315"
+         style="stroke-width:0.26458332">Level 3</tspan></text>
+    <g
+       id="g3615"
+       transform="translate(-12.093946)">
+      <rect
+         ry="6.2808342"
+         rx="6.2808342"
+         y="86.234047"
+         x="148.54819"
+         height="12.561668"
+         width="22.954977"
+         id="rect1891-6-8"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#dddddd;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text1881-5"
+         y="95.474709"
+         x="172.77585"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="95.474709"
+           x="172.77585"
+           id="tspan1879-8"
+           sodipodi:role="line">= siblings</tspan></text>
+    </g>
+    <g
+       id="g3688"
+       transform="translate(-1.5311861,1.5875)">
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path1525-0"
+         d="m 161.31057,78.232533 13.36347,0.06682"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1609-2)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="137.34996"
+         y="80.495735"
+         id="text1881-5-6"><tspan
+           sodipodi:role="line"
+           id="tspan1879-8-6"
+           x="137.34996"
+           y="80.495735"
+           style="stroke-width:0.26458332">Parent</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:'TeX Gyre Termes Math';-inkscape-font-specification:'TeX Gyre Termes Math';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="178.72203"
+         y="80.567703"
+         id="text1881-5-6-4"><tspan
+           sodipodi:role="line"
+           id="tspan1879-8-6-6"
+           x="178.72203"
+           y="80.567703"
+           style="stroke-width:0.26458332">Child</tspan></text>
+    </g>
+  </g>
+</svg>
