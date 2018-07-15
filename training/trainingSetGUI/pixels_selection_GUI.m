@@ -62,6 +62,7 @@ hierarchy = struct();
 miscgui.selection_allowed = true;
 frame_processing_local = {struct('name','Intensity')};
 miscgui.currentOP = frame_processing_local{1};
+miscgui.rootname = 'Zcells';
 
 
 % Choose default command line output for pixels_selection_GUI
@@ -122,9 +123,6 @@ end
 function addstackbtn_Callback(hObject, eventdata, handles)
 
 global miscgui
-
-miscgui.rootname = 'ZstackSegmentation';
-miscgui.zstacks_folder = relative2full('/google_drive/zstacks/',miscgui.rootname);
 
 % Get filename (TODO: make it possible to read TIF files directly)
 [filename,path,findex] = uigetfile({'*.mat','Stack/Dataset files (.mat)'; '*.zip','Bundle files (.zip)'; '*.tif','TIFF images'},'Pick a stack, a training set, a TIFF file or a bundle','MultiSelect', 'on');
@@ -230,7 +228,7 @@ stacks = fieldnames(data.trainingpx);
 % Reload the matfiles for each stack:
 for ind1 = 1:numel(stacks)
     disp(['Reloading stack ' stacks{ind1} ' from path: ' data.trainingpx.(stacks{ind1}).path]);
-    r2f = relative2full(data.trainingpx.(stacks{ind1}).path,'ZstackSegmentation');
+    r2f = relative2full(data.trainingpx.(stacks{ind1}).path,miscgui.rootname);
     
     if exist(r2f, 'file') == 2
         %data.trainingpx.(stacks{ind1}).mfile = matfile(r2f); % Not necessary?
@@ -246,7 +244,7 @@ for ind1 = 1:numel(stacks)
             case 'Yes...'
                 [fname, pname] = uigetfile('*.mat',stacks{ind1});
                 r2f = fullfile(pname,fname);
-                data.trainingpx.(stacks{ind1}).path = full2relative(r2f,'ZstackSegmentation');
+                data.trainingpx.(stacks{ind1}).path = full2relative(r2f,miscgui.rootname);
                 data.trainingpx.(stacks{ind1}).mfile = matfile(r2f);
             case 'No...'
                 hw= warndlg('You will not be able to change the focus or compile data and train for this stack until you provide a valid Z-stack file','No file for this stack');
@@ -428,7 +426,7 @@ try
 catch ME
     if (strcmp(ME.identifier,'MATLAB:MatFile:NoFile'))
         warning('Matfile not found, trying reload from path...');
-        currstack.mfile = matfile(relative2full(currstack.path,'ZstackSegmentation'));
+        currstack.mfile = matfile(relative2full(currstack.path,miscgui.rootname));
         stack = currstack.mfile.(currstack.stackvarname);
     else
         rethrow(ME)
@@ -683,7 +681,7 @@ else
         pbval = pbval(1);
     end
     frame_processing_local(pbval) = [];
-    set(handles.classbox,'Value',1);
+    set(handles.preprocessing_listbox,'Value',1);
     miscgui.currentOP = frame_processing_local{1};
     updateOPbox(handles);
 end

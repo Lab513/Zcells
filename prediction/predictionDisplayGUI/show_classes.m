@@ -1,4 +1,26 @@
 function [imcomp, layers] = show_classes(res, imgsize, varargin )
+%
+% [imcomp, layers] = show_classes(res, imgsize)
+% 
+% [imcomp, layers] = show_classes(res, imgsize, 'Name', Value)
+%
+% Classification Results display function.
+% You must provide a results structure 'res' as produced by the function
+% RunPrediction(), and the size of one frame, 'imgsize'. 'imcomp' is an RGB image
+% displaying the predicted classes in different colors. 'layers' is an 
+% N-dimensinal boolean image, where N is the number of classes to display. This is
+% useful for downstream segmentation.
+%
+% You can provide the following Name-Value pair arguments:
+% * 'WhichClasses', cell-of-class-names: A cell containing the names of the
+%   classes you want to display. You may prefer to display only a
+%   subselection of the classes. All classes are shown by default.
+% * 'Colors', N-by-3 matrix: contains rgb values (0 to 1) tu use for each
+%   class.
+% * 'Background', image matrix: An image that you want to display the
+%   classes over. Typically the middle frame of your stack. Default: [].
+% * 'alpha', 0-to-1 scalar: Transparency of the classes if doing an
+%   background overlay. Default: 1.
 
 % Parameters and inputs parsingP:
 ip = inputParser();

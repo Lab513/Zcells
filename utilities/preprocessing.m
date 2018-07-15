@@ -1,8 +1,13 @@
-function IF = preprocessing(I,feat)
+function IF = preprocessing(I,feat,varargin)
 % This function handles the preprocessing operations to perform on the
 % frames in the stack. It takes a frame I as an input and a
 % "feature/operation" structure, applies the operation described by the
 % structure, and spits out an image of equal dimension.
+
+ip = inputParser();
+ip.addOptional('frame_nb',0,@(x) isnumeric(x) && isscalar(x));
+ip.parse;
+
 
 switch lower(feat.name)
     case 'intensity'
@@ -37,5 +42,10 @@ switch lower(feat.name)
     case 'customfunction'
         % You can pass any function that returns an image of equal
         % size
-        IF = feval(feat.fhandle,I);
+        switch nargin(feat.fhandle)
+            case 1 % Don't pass frame number
+                IF = feval(feat.fhandle,I);
+            case 2 % Pass frame number
+                IF = feval(feat.fhandle,I,ip.Results.frame_nb);
+        end
 end

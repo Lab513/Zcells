@@ -6,19 +6,18 @@ addpath(genpath('.'))
 
 training_set = createOrLoadTrainingSet();
 
-%% Then run through the stack(s) to create the actual training variable that will be used with the SVM:
+%% And train:
 
+% Where to save the classifier once trained:
+[save_fn, save_pn] = uiputfile('*.mat','Save trained classifier?');
+
+% Extract data from stacks:
 [data, training_set.feature_extraction] = LoadAndExtract(training_set);
 
-%% Launch Trees training:
-
-training_set.trainingpx = struct(); % Saves some space
-% Train SVMs on that set.
+% Launch Classifier training:
+training_set.trainingpx = struct(); % Saves some space (make sure you save your training set!)
 SVMs = training(training_set, data);    
-    
-%% Save trained classifier to disk:
 
-[save_fn, save_pn] = uiputfile('*.mat','Save trained classifier?');
 
 % Save the trained set (or wait for parallel jobs to complete and then save
 % it if using parallel training)
@@ -27,4 +26,4 @@ while(~saveTrainedSet(fullfile(save_pn,save_fn),SVMs,training_set))
     disp([datestr(now) ': Waiting for parallel training to finish... (This might take a while)']);
 end
 
-disp([datestr(now) ': Done!'])
+disp([datestr(now) ': Training one!'])

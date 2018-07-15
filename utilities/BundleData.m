@@ -21,7 +21,7 @@ stacks = fieldnames(training_set.trainingpx);
 
 % Retrieve all the filenames:
 for ind1 = 1:numel(stacks)
-    stackfiles{ind1} = relative2full(training_set.trainingpx.(stacks{ind1}).path,'ZstackSegmentation');
+    stackfiles{ind1} = relative2full(training_set.trainingpx.(stacks{ind1}).path,'Zcells');
 end
 
 % Create temporary training set mat file:

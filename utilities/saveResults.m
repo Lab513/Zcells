@@ -1,4 +1,9 @@
 function saveResults(path,results,varargin)
+% This saves prediction results to disk in a specific format so that they
+% can reloaded into the predictionDisplay GUI.
+% Note: There is currently some problem which I can't elucidate, and the
+% results are saved twice into the MAT file: once as 'results' and once as
+% 'Results'. I can't understand why yet
 
 ip = inputParser();
 ip.addOptional('stackFile','',@isstr)

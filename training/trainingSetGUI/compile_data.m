@@ -55,7 +55,7 @@ function [trainingMat, class_vec] = compile_data(training_set, varargin)
     
     
     %Misc
-    rootname = 'ZstackSegmentation';
+    rootname = 'Zcells';
 
     % Initialize formatted training matrix and class vector:
     trainingMat = [];
