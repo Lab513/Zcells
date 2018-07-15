@@ -11,7 +11,7 @@
 %       'params', the struct containing parameters needed for others
 % functions.
 
-function Results = RunPrediction(stack, feat_extr, feat_mu, SVMs, varargin)
+function Results = RunPrediction(stack, feat_extr, feat_mu, SVMs, classnames, varargin)
     %% Inputs
     ip = inputParser;
     addParameter(ip,'ROI',[]);
@@ -48,17 +48,17 @@ function Results = RunPrediction(stack, feat_extr, feat_mu, SVMs, varargin)
         parallelpool = ip.Results.Parallelize;
 
         Results = batch( @RunPredictionSubroutine,1, ...
-            {SVMs, data,  ip.Results.Parallelize, ip.Results.SaveResults, ip.Results.SaveName, ip.Results.Verbosity}, ...
+            {SVMs, classnames, data,  ip.Results.Parallelize, ip.Results.SaveResults, ip.Results.SaveName, ip.Results.Verbosity}, ...
             'Profile', ip.Results.Cluster, ...
             'Pool', parallelpool);
 
     else
-        Results = RunPredictionSubroutine(SVMs, data, ip.Results.Parallelize, ip.Results.SaveResults, ip.Results.SaveName, ip.Results.Verbosity);
+        Results = RunPredictionSubroutine(SVMs, classnames, data, ip.Results.Parallelize, ip.Results.SaveResults, ip.Results.SaveName, ip.Results.Verbosity);
     end
         
 
     
-function Results = RunPredictionSubroutine(SVMs, data, parallelize,autosave,savename,verbosity)
+function Results = RunPredictionSubroutine(SVMs, classnames, data, parallelize,autosave,savename,verbosity)
     
 % Reprocess the SVMs tree into an ordered list:
     childrenlist = recursive_listing(SVMs,'');
@@ -75,16 +75,14 @@ function Results = RunPredictionSubroutine(SVMs, data, parallelize,autosave,save
         data_to_classify = data(sub_sel,:);
 
         % Run the prediction:
-        Scores = predict_siblings(SVMs,data_to_classify,siblings,parallelize,verbosity);
-%         Scores = mysoftmax(Scores);
-        [~, tmp_dump] = max(Scores, [], 2);
+        [Scores, tmp_dump] = predict_siblings(SVMs,data_to_classify,siblings,parallelize,verbosity);
 
         % Tidy-up results:
         for ind2 = 1:numel(siblings)
             Results.(siblings{ind2}).scores = ones(size(data,1),1)*NaN;
             Results.(siblings{ind2}).scores(sub_sel) = Scores(:,ind2);
             Results.(siblings{ind2}).isa = false(size(data,1),1);
-            Results.(siblings{ind2}).isa(sub_sel) = tmp_dump == ind2;
+            Results.(siblings{ind2}).isa(sub_sel) = strcmp(tmp_dump,num2str(find(strcmp(siblings{ind2},classnames)))); % I have to do this ugly comparison because Matlab outputs the labels as a cell array of characters: '1', '2', '3'... Ridiculous...
             Results.(siblings{ind2}).parent = SVMs.(siblings{ind2}).parent;
             if isfield(SVMs.(siblings{ind2}),'children')
                 Results.(siblings{ind2}).children = SVMs.(siblings{ind2}).children;
@@ -97,29 +95,18 @@ function Results = RunPredictionSubroutine(SVMs, data, parallelize,autosave,save
         save(fullfile(autosave,savename),'Results');
     end
 
-function Scores = predict_siblings(SVMs,data,siblings,Parallelize,verbosity)
+function [Scores, lbls] = predict_siblings(Trees_model,data,siblings,Parallelize,verbosity)
 % Predicts the scores for all siblings, whether we are in binary or
 % winner-takes-all configuration
 
-    for ind1 = 1:numel(siblings)
-        s = SVMs.(siblings{ind1});
-        switch s.type
-            case 'binary'
-                if ~isempty(s.SVM)
-                    Scores = script_predict({s.SVM}, data, {[ siblings{ind1} ' & ' s.siblings{1}]}, Parallelize,verbosity);
-                    Scores(:,ind1) = Scores(:,1);
-                    Scores(:,setdiff(1:2,ind1)) = -Scores(:,1);
-                    return
-                end
-            case 'WTA'
-                SVM_models{ind1} = s.SVM;
-            case 'Trees'
-                Trees_model = s.SVM;
-                Scores = script_predict_trees(Trees_model, data, siblings, Parallelize,verbosity);
-                return;
-        end
-    end
-    Scores = script_predict(SVM_models, data, siblings, Parallelize,verbosity);
+if verbosity >= 1
+    disp(['Launching prediction for classes: ' [siblings{:}]]);
+end
+ind1 = 1;
+while(isempty(Trees_model.(siblings{ind1}).SVM))
+    ind1 = ind1 + 1;
+end
+[lbls,Scores,~] = predict(Trees_model.(siblings{ind1}).SVM,data);
 
 
 function list = recursive_listing(SVMs,parentname)
@@ -134,43 +121,3 @@ function list = recursive_listing(SVMs,parentname)
         end
     end
     
-function Scores = script_predict(SVM_models, mat, classnames, Parallelize, verbosity)
-% This function runs the perdiction for all the SVM models given and for
-% the data given.
-
-    Scores = zeros(size(mat, 1), numel(SVM_models));
-    for j = 1:numel(SVM_models)
-        if verbosity >= 1
-            disp(['Launching prediction for class: ' classnames{j}]);
-        end
-        if Parallelize % PARALLELIZE
-            matsize = floor(size(mat,1)/Parallelize);
-            remainder = mod(size(mat,1),Parallelize);
-            parfor ind1 = 1:Parallelize
-                % Split mat into sub mats
-                if ind1 == Parallelize
-                    indexes = ((ind1-1)*matsize+1):(ind1*matsize + remainder)
-                else
-                    indexes = ((ind1-1)*matsize+1):(ind1*matsize);
-                end
-                % Run on each
-                [~,scoreSVMpar{ind1}] = predict(SVM_models{j}, mat(indexes,:));
-            end
-            % Concatenate them all
-            scoreSVM = [];
-            for ind1 = 1:Parallelize
-                scoreSVM = cat(1,scoreSVM,scoreSVMpar{ind1});
-            end
-            clearvars scoreSVMpar
-        else % DON'T PARALLELIZE
-            [~,scoreSVM] = predict(SVM_models{j}, mat);
-        end
-        Scores(:,j) = scoreSVM(:,2);
-    end
-
-function Scores = script_predict_trees(Trees_model, mat, classnames, Parallelize, verbosity)
-
-disp(['Launching prediction for classes: ' [classnames{:}]]);
-tic
-[~,Scores,~] = predict(Trees_model,mat);
-toc
