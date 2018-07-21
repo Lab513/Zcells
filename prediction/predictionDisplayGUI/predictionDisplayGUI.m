@@ -115,6 +115,7 @@ for ind1 = 1:numel(ud)
 end
 set(handles.listbox_stacks,'UserData',ud);
 updateListbox(handles);
+updateDisplay(handles);
 
 function txt = myDCMupdate(hObject,evt,handles)
 
@@ -262,6 +263,7 @@ while(true)
     set(handles.listbox_stacks,'UserData',stacks);
 end
 updateListbox(handles);
+updateDisplay(handles);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -410,7 +412,7 @@ for ind1 = 1:numel(ud)
     strings{ind1} = pimpmystrings(ud(ind1).fname,color);
 end
 set(handles.listbox_stacks,'String',strings);
-drawnow
+drawnow;
 
 function I = loadmidimg(path)
 % Load the frame in the middle of the stack:
@@ -486,6 +488,9 @@ end
 
 function pushbutton_selectwatch_Callback(hObject, eventdata, handles)
 d = uigetdir('','Please pick a folder to watch');
+if isnumeric(d) && d == 0
+    return;
+end
 set(handles.edit_watchfolder,'String',d);
 
 function pushbutton_startwatch_Callback(hObject, eventdata, handles)

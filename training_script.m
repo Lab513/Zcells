@@ -15,6 +15,7 @@ training_set = createOrLoadTrainingSet();
 [data, training_set.feature_extraction] = LoadAndExtract(training_set);
 
 % Launch Classifier training:
+disp([datestr(now) ': Launching training...'])
 training_set.trainingpx = struct(); % Saves some space (make sure you save your training set!)
 SVMs = training(training_set, data);    
 
@@ -26,4 +27,4 @@ while(~saveTrainedSet(fullfile(save_pn,save_fn),SVMs,training_set))
     disp([datestr(now) ': Waiting for parallel training to finish... (This might take a while)']);
 end
 
-disp([datestr(now) ': Training one!'])
+disp([datestr(now) ': Training done!'])

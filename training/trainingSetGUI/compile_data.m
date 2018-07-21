@@ -75,27 +75,12 @@ function [trainingMat, class_vec] = compile_data(training_set, varargin)
         disp(trainingpx.(zstackstr).path)
         fullpath = relative2full(trainingpx.(zstackstr).path,rootname);
 
-        % Identify which pixels to exctract from the stack, and update group vector:
-        groupspxl = [];
-        group = [];
-        for ind1 = 1:numel(classnames)
-            classname = classnames{ind1};
-            if isfield(trainingpx.(zstackstr).pixel,classname) % If there are pixels for this group in this zstack:
-                group = [group; ind1.*ones(numel(trainingpx.(zstackstr).pixel.(classname)),1)];
-                groupspxl = cat(2,groupspxl,trainingpx.(zstackstr).pixel.(classname)');
-            end
-        end
+        % Check if there are pixels to extract:
+        [groupspxl, ~] = getSubSel(trainingpx, classnames, zstackstr, params);
         if isempty(groupspxl)
             disp('No labels on zstack, nothing to do...');
             disp('');
         else
-
-            % Extract subsampling ratio (if specified):
-            if isfield(params,'subsampling') && isfield(params.subsampling,classname)
-                randSub = (params.subsampling.(classname) / 100);
-            else
-                randSub = 1;
-            end
 
             % Load up the stack once for all offsets:
             disp('Reading data on file...');
@@ -110,25 +95,19 @@ function [trainingMat, class_vec] = compile_data(training_set, varargin)
                 disp(['Retrieving for focus shift = ' num2str(i) ' frame (radius = ' num2str(radius) ' frames)']);
 
                 % Subsample the signatures if specified
-                if randSub < 1 % The random subsample is different for each focussing offset
-                    [subpxl, idxs] = datasample(groupspxl,round(numel(groupspxl)*randSub),'Replace',false);
-                    subgrp = group(idxs);
-                else
-                    subpxl = groupspxl;
-                    subgrp = group;
-                end
+                [groupspxl, group] = getSubSel(trainingpx, classnames, zstackstr, params);
 
                 % Run through the stack and concatenate the training matrix and class vector on
                 % the fly:
                 trainingMat = cat(1, trainingMat, runthroughstack(...
                     zstack, ...
                     'offset', framestorun, ...
-                    'groupspxl', subpxl, ...
+                    'groupspxl', groupspxl, ...
                     'pca_coeffs', ip.Results.pca_coeffs, ...
                     'pca_mu', ip.Results.pca_mu, ...
                     'use_features', ip.Results.use_features ...
                     ));
-                class_vec = cat(1, class_vec, subgrp);
+                class_vec = cat(1, class_vec, group);
             end
         end
 
@@ -161,3 +140,21 @@ function isvalid = validatetrainingset(t_s)
     end
 end
 
+function [groupspxl, group] = getSubSel(trainingpx, classnames, zstackstr, params)
+    groupspxl = [];
+    group = [];
+    for ind1 = 1:numel(classnames)
+        classname = classnames{ind1};
+        if isfield(trainingpx.(zstackstr).pixel,classname) % If there are pixels for this group in this zstack:
+            if isfield(params,'subsampling') && isfield(params.subsampling,classname)
+                randSub = (params.subsampling.(classname) / 100);
+            else
+                randSub = 1;
+            end
+            pxls = trainingpx.(zstackstr).pixel.(classname)';
+            [subpxls] = datasample(pxls,round(numel(pxls)*randSub),'Replace',false);
+            groupspxl = cat(2,groupspxl,subpxls);
+            group = [group; ind1.*ones(numel(subpxls),1)];
+        end
+    end
+end

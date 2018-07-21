@@ -420,6 +420,7 @@ if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColo
 end
 
 function stack = loadwholestack(currstack)
+global miscgui
 
 try
     stack = currstack.mfile.(currstack.stackvarname);

@@ -46,7 +46,7 @@ for ind1 = 1:numel(fname_c)
     % Display prediction results:
     firstframe = stack.stack(1,1);
     firstframe = firstframe{1};
-    [I, ~] = show_classes(res{ind1}, size(firstframe),'Colors',rgbmap);
+    [I, ~] = show_classes(res{ind1}, size(firstframe),'Colors',rgbmap,'WhichClasses',classnames);
     figure(ind1);
     imshow(I);
     title(['Prediction results for stack ' fname])
