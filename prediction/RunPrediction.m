@@ -11,7 +11,7 @@
 %       'params', the struct containing parameters needed for others
 % functions.
 
-function Results = RunPrediction(stack, feat_extr, feat_mu, SVMs, varargin)
+function Results = RunPrediction(stack, feat_extr, feat_mu, SVMs, classnames, varargin)
     %% Inputs
     ip = inputParser;
     addParameter(ip,'ROI',[]);
@@ -48,17 +48,17 @@ function Results = RunPrediction(stack, feat_extr, feat_mu, SVMs, varargin)
         parallelpool = ip.Results.Parallelize;
 
         Results = batch( @RunPredictionSubroutine,1, ...
-            {SVMs, data,  ip.Results.Parallelize, ip.Results.SaveResults, ip.Results.SaveName, ip.Results.Verbosity}, ...
+            {SVMs, classnames, data,  ip.Results.Parallelize, ip.Results.SaveResults, ip.Results.SaveName, ip.Results.Verbosity}, ...
             'Profile', ip.Results.Cluster, ...
             'Pool', parallelpool);
 
     else
-        Results = RunPredictionSubroutine(SVMs, data, ip.Results.Parallelize, ip.Results.SaveResults, ip.Results.SaveName, ip.Results.Verbosity);
+        Results = RunPredictionSubroutine(SVMs, classnames, data, ip.Results.Parallelize, ip.Results.SaveResults, ip.Results.SaveName, ip.Results.Verbosity);
     end
         
 
     
-function Results = RunPredictionSubroutine(SVMs, data, parallelize,autosave,savename,verbosity)
+function Results = RunPredictionSubroutine(SVMs, classnames, data, parallelize,autosave,savename,verbosity)
     
 % Reprocess the SVMs tree into an ordered list:
     childrenlist = recursive_listing(SVMs,'');

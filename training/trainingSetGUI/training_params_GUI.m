@@ -22,7 +22,7 @@ function varargout = training_params_GUI(varargin)
 
 % Edit the above text to modify the response to help training_params_GUI
 
-% Last Modified by GUIDE v2.5 15-Jun-2018 15:10:52
+% Last Modified by GUIDE v2.5 21-Jun-2018 17:53:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -143,9 +143,22 @@ function varargout = training_params_GUI_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
+% This function is executed right after OpeningFcn: If the user cancelled
+% after the SVM-->RF parameters questdlg box, we close the figure:
+if (isfield(handles,'closefigure') && handles.closefigure)
+
+      figure1_CloseRequestFcn(hObject, eventdata, handles)
+
+end
 
 
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 
+% Hint: delete(hObject) closes the figure
+delete(hObject);
 
 
 
@@ -1221,3 +1234,4 @@ end
 
 % For simplicity, just reload the whole figure:
 miscgui.debugging.handles.training_params = training_params_GUI();
+

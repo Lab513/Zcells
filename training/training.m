@@ -122,8 +122,6 @@ end
 
 
 
-
-
 %% Process parameters:
 function processed = process_SVM_params(training_params, classnames)
 % This function re-formats the parameters training structure to be easier

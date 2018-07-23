@@ -115,6 +115,7 @@ for ind1 = 1:numel(ud)
 end
 set(handles.listbox_stacks,'UserData',ud);
 updateListbox(handles);
+updateDisplay(handles);
 
 function txt = myDCMupdate(hObject,evt,handles)
 
@@ -232,6 +233,7 @@ while(true)
         trained.feat_extr,...
         trained.feat_mu,...
         trained.SVMs, ...
+        trained.classnames, ...
         'FramesSelection',frames,...
         'use_features', trained.frame_processing, ...
         'IndependentJob',indpdt,...
@@ -261,6 +263,7 @@ while(true)
     set(handles.listbox_stacks,'UserData',stacks);
 end
 updateListbox(handles);
+updateDisplay(handles);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -277,16 +280,22 @@ end
 
 function pushbutton_trainedset_Callback(hObject, eventdata, handles)
 [fname, pname]= uigetfile('*.mat','Please pick a trained classifier file');
+if isnumeric(fname) && fname == 0
+    return;
+end
 trainedpath = fullfile(pname,fname);
 set(handles.edit_trainedset,'String',trainedpath);
 loadtrainedset(trainedpath,handles)
 
 function loadtrainedset(trainedpath, handles)
 
+
 if isempty(trainedpath)
     errordlg('No trained classifier specified / File not valid','No classifier');
     return;
 end
+set(handles.loadingtext,'Visible','on')
+drawnow
 trained = load(trainedpath);
 if ~strcmp(trained.type_of_file,'trained classifier')
     errordlg({trainedpath 'is not a valid classifier file'},'Invalid classifier')
@@ -296,6 +305,7 @@ dump.classnames = trained.classnames;
 dump.rgbmap = trained.rgbmap;
 set(handles.uibuttongroup_display,'UserData',dump);
 set(handles.edit_trainedset,'UserData',trained); % This will eat up some memory but should speed up the launchprediction process...
+set(handles.loadingtext,'Visible','off')
 updateDisplayLists(handles)
 
 
@@ -402,7 +412,7 @@ for ind1 = 1:numel(ud)
     strings{ind1} = pimpmystrings(ud(ind1).fname,color);
 end
 set(handles.listbox_stacks,'String',strings);
-drawnow
+drawnow;
 
 function I = loadmidimg(path)
 % Load the frame in the middle of the stack:
@@ -478,6 +488,9 @@ end
 
 function pushbutton_selectwatch_Callback(hObject, eventdata, handles)
 d = uigetdir('','Please pick a folder to watch');
+if isnumeric(d) && d == 0
+    return;
+end
 set(handles.edit_watchfolder,'String',d);
 
 function pushbutton_startwatch_Callback(hObject, eventdata, handles)
@@ -622,6 +635,7 @@ ud = get(handles.uibuttongroup_display,'UserData');
 strs = pimpmystrings(ud(:).classnames,ud.rgbmap);
 set(handles.listbox_classif,'String',strs);
 set(handles.listbox_classif,'Value',1);
+drawnow
 
 function listbox_confidence_Callback(hObject, eventdata, handles)
 updateDisplay(handles)
@@ -702,6 +716,7 @@ switch selected
         set(c,'LineWidth',2);
         set(c,'FontSize',12);
 end
+drawnow
 
 function RGB = overlayROI(I,ROI)
 
@@ -735,6 +750,9 @@ function uipushtool_saveres_ClickedCallback(hObject, eventdata, handles)
         }, ...
         'Save as', 'results.mat' ...
     );
+if isnumeric(fname) && fname == 0
+    return;
+end
 imgfmts = {'dump', 'tif', 'png', 'jpg'};
 
 if findx == 1
@@ -760,6 +778,11 @@ end
 
 function uipushtool_open_ClickedCallback(hObject, eventdata, handles)
 
+trained = get(handles.edit_trainedset,'UserData');
+if isempty(trained)
+    warndlg('Select a classifier first please')
+    return
+end
 
 [fnames, pname] = uigetfile('*.mat','Select one or more results file','MultiSelect','On');
 if isnumeric(fnames) && fnames == 0
@@ -775,7 +798,10 @@ drawnow
 for ind1 = 1:numel(fnames)
     res = load(fullfile(pname,fnames{ind1}));
     if ~strcmp(res.type_of_file,'results')
-        warndlg({fnames{ind1},'is not a valid results file. Skipping...'},'Invalid file');
+        warndlg({fnames{ind1},' is not a valid results file. Skipping...'},'Invalid file');
+    elseif ~(numel(fieldnames(res.results)) == numel(trained.classnames) ...
+            && all(cellfun(@(x) any(strcmp(x,trained.classnames)),fieldnames(res.results))))
+        warndlg({fnames{ind1},': mismatch between class names in classifier and results. Skipping...'},'Wrong classifier');
     else
         stacks(ind1).results = res.results;
         if isfield(res,'img')

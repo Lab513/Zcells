@@ -131,7 +131,7 @@ function [compiled] = extract_signatures(stack, groupspxl, offset, value_in, use
         im = stack(:,:,ind1);
         im = imadjust(im, [value_in(1);value_in(2)]);
         % Extract features:
-        imfeatures = extract_features(im,groupspxl,use_features);
+        imfeatures = extract_features(im,groupspxl,use_features,ind0);
         
         % Store in matrices
         % If using PCA coefficients for compression on-the-fly:
@@ -154,15 +154,14 @@ function [compiled] = extract_signatures(stack, groupspxl, offset, value_in, use
         
 end
 
-function extracted = extract_features(I,groupspxl,feats)
+function extracted = extract_features(I,groupspxl,feats,fr_nb)
 % Given a frame and the indexes of the pixels of interest, this function
 % extracts the features specified in feats and returns a compiles set
 % of observcations in extracted
 
     extracted = zeros(numel(groupspxl), numel(feats));
     for ind1 = 1:numel(feats)
-%         feats{ind1}
-        IF = preprocessing(I,feats{ind1});
+        IF = preprocessing(I,feats{ind1},fr_nb);
         extracted(:,ind1) = double(IF(groupspxl));
     end
 end

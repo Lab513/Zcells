@@ -14,7 +14,7 @@ for ind1 = 1:numel(stacks)
     oldpath = training_set.trainingpx.(stacks{ind1}).path;
     parts = strsplit(oldpath, filesep);
     stackname = parts{end};
-    training_set.trainingpx.(stacks{ind1}).path = full2relative(fullfile(path, stackname),'ZstackSegmentation');
+    training_set.trainingpx.(stacks{ind1}).path = full2relative(fullfile(path, stackname),'Zcells');
 end
 
 save(datafile,'training_set','type_of_file','-v7.3');

@@ -1,4 +1,26 @@
 function [I, scores] = show_conf(res, imgsize, varargin )
+%
+% [imconf, scores] = show_conf(res, imgsize)
+% 
+% [imconf, scores] = show_conf(res, imgsize, 'Name', Value)
+%
+% Classification confidence display function.
+% You must provide a results structure 'res' as produced by the function
+% RunPrediction(), and the size of one frame, 'imgsize'. 'imconf' is an RGB image
+% displaying the classification confidence . 'scores' is an N-dimensinal
+% image, where N is the number of classes to display. Each 1-dimensional
+% image contains the confidence scores for 1 class, values between [0 1].
+% This is useful for downstream segmentation.
+%
+% You can provide the following Name-Value pair arguments:
+% * 'Colormap', colormap matrix: A colormap matrix to specify how to
+%   display scores. Default: jet();
+% * 'ZeroColor', 1-by-3 vector: The color to use for parts that are not
+%   classified as any of the classes.
+% * 'WhichClasses', cell-of-class-names: A cell containing the names of the
+%   classes you want to display. You may prefer to display only a
+%   subselection of the classes. All classes are shown by default.
+
 
 % Parameters and inputs parsingP:
 ip = inputParser();
