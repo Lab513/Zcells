@@ -1,13 +1,15 @@
-# ZstackSegmentation
-ZstackSegmentation is a segmentation technique of microscopy images based on Z-stacks, inspired by hyperspectral imaging.
-For more information on the same, you may visit the wiki at <https://github.com/Lab513/ZstackSegmentation/wiki>
+# Zcells
+Zcells is a segmentation technique of microscopy images based on Z-stacks, inspired by hyperspectral imaging.
+For more information on the same, please visit the wiki at <https://github.com/Lab513/Zcells/wiki> or read the associated paper here: <http://www.nature.com/articles/s41598-018-29647-5>
+
+IMPORTANT: We strongly recommend using the random_forest branch of this repository as it runs consistently faster than the master branch. Also, please use the latest committed version instead of the 1.0 release as a number of bugs have been corrected since then. We are close to releasing version 1.1 but we still want to add in a number of features before that.
 
 The whole process is divided into two main parts, training and prediction. Thus, there are two main user scripts, training_script.m and prediction_script.m, about which we will discuss in the following sections.
 
 For further details about each of the functions and the parameters they take and return, you may read the relevant parts of the source code, which have comments explaining the same.
 
 ## Training Phase
-To launch the training, just type the following command in Matlab (version R2016b or later required)
+To launch the training, just type the following command in Matlab (version R2017a or later required)
 
 `````matlab
 training_script
@@ -23,21 +25,11 @@ You can save the labelled dataset for future use using the save option from the 
 #### Selecting Parameters and Launching the Training
 You can click the "Training Parameters" button to get a GUI window which allows you to specify the various parameters for training. These include choice of kernel for the SVM, various parallelization options, frame sub-selection options, options for PCA etc.
 
-A good set of default, off-the shelf parameters would be as follows-
-
-(1) Focus shifting enabled, with radius anywhere between 1 to 5- the higher the better (this is like data augmentation, and the higher the number, the more the augmentation)
-
-(2) Parallel processing enabled- For purely performance reasons
-
-(3) Standardize option within the SVM hyperparameters enabled - This helps in faster and better convergence of the SVMs.
-
-(4) Auto option within SVM hyperparamters enabled.
-
 It should be a good starting point to label around 2000 pixels of each class while training. Once this gives the proof of concept, larger datasets can be labelled for even better performance.
 
-Once you specify all that, you can simply close this window, and click on "Launch Training" to start training the SVMs.
+Once you specify all that, you can simply click on "Launch Training" to start training the classifier(s).
 
-Once the training is over, you will be asked if you want to save the newly trained classifier.
+Once the training is over (typically takes 20 to 120 minutes), the newly trained classifier should be saved to disk.
 
 ## Prediction Phase
 For the prediction phase, you need to issue the following commands in Matlab
