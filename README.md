@@ -1,22 +1,24 @@
 # Zcells
 Zcells is a segmentation technique of microscopy images based on Z-stacks, inspired by hyperspectral imaging.
-For more information on the same, please visit the wiki at <https://github.com/Lab513/Zcells/wiki> or read the associated paper here: <http://www.nature.com/articles/s41598-018-29647-5>
+For more information on the same, please visit the wiki at <https://github.com/Lab513/Zcells/wiki> or read the associated paper here: <http://www.nature.com/articles/s41598-018-29647-5>.
 
-IMPORTANT: We strongly recommend using the random_forest branch of this repository as it runs consistently faster than the master branch. Also, please use the latest committed version instead of the 1.0 release as a number of bugs have been corrected since then. We are close to releasing version 1.1 but we still want to add in a number of features before that.
+Curated datasets can be found here: <https://zenodo.org/record/1307781>.
+
+IMPORTANT: We strongly recommend using the randomforest branch of this repository as it runs consistently faster than the master branch. Also, please use the latest committed version instead of the 1.0 release as a number of bugs have been corrected since then. We are close to releasing version 1.1 but we still want to add in a number of features before that.
 
 The whole process is divided into two main parts, training and prediction. Thus, there are two main user scripts, training_script.m and prediction_script.m, about which we will discuss in the following sections.
 
 For further details about each of the functions and the parameters they take and return, you may read the relevant parts of the source code, which have comments explaining the same.
 
 ## Training Phase
-To launch the training, just type the following command in Matlab (version R2017a or later required)
+To launch the training, just move to the root of the Zcells folder, and type the following command in Matlab (version R2017a or later required)
 
 `````matlab
 training_script
 `````
 
 #### Labelling the Zstacks
-A GUI window should pop up, where you can either load new and unlabelled Zstacks, or even load some already labelled Zstack. The Zstacks should be somewhere in the working directory or one of its subdirectories the system to work.
+A GUI window will pop up, where you can either load new and unlabelled Zstacks, or even load some already labelled Zstack. The Zstacks should be somewhere in the working directory or one of its subdirectories the system to work.
 
 Once the selected Zstack displays on the screen, you may proceed to start labelling. You can add a class, decide its hierarchial relationship with the other classes, the colour used to represent it and so on. Once you set up the class, you can click the "Append Pixels" button to start labelling the picture. The pixels will be labelled with the class that is selected from the list of classes on the left. You can use the zoom option of the Matlab GUI to zoom in and out of the image as per the requirement, then left click to mark the corner edges of the closed region that you want to select. After putting in the last vertex, it can be automatically joined to the first one by right clicking anywhere on the image. Then double left click on the selected closed loop to finally colour it solid with the colour of the selected class.
 
